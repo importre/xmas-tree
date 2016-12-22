@@ -4,6 +4,7 @@
 
 <p align="center"><img src="https://cloud.githubusercontent.com/assets/1744446/21423997/549b4294-c883-11e6-8aa6-dd9016a578fb.png" width=283></p>
 
+> Decorations are generated randomly
 
 ## Install
 
@@ -18,27 +19,6 @@ $ npm install --save xmas-tree
 const xmasTree = require('xmas-tree');
 
 console.log(xmasTree());
-```
-
-### Output
-
-> Decorations are generated randomly
-
-```
-
-           *
-         _/ \_
-        \     /
-        /_' '_\
-         /. '\
-        /   @ \
-       /   o*o \
-      /.-* +    \
-     /  .  -@ . .\
-    *-------------*
-       [_______]
-        \_____/
-
 ```
 
 

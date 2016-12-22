@@ -5,61 +5,106 @@ const _ = require('colors');
 
 module.exports = opts => xmasTree(opts || {});
 
+const DEFAULT_COLOR = false;
+const DEFAULT_SIZE = 15;
+const DECO_CANDIDATES = '      *.-\'o+@';
+const COLOR_CANDIDATES = [
+	'blue',
+	'cyan',
+	'green',
+	'magenta',
+	'red',
+	'white',
+	'yellow'
+];
+
 function xmasTree(opts) {
-	const size = treeSize(opts);
-	const hasColor = treeColor(opts);
+	const size = getSizeOpt(opts);
+	const hasColor = getColorOpt(opts);
 	return Array(size).fill()
-		.map((_, i) => treeLines(i, size, hasColor))
+		.map((_, i) => makeTree(i, size, hasColor))
 		.filter(i => i.length > 0)
-		.concat(treeBottom(size, hasColor))
+		.concat(makePot(size, hasColor))
 		.join('\n')
 		.replace(/^/, '\n')
 		.replace(/^/gm, '    ');
 }
 
-function randomDeco(hasColor) {
-	const candidates = '      *.-\'o+@';
-	const i = random(0, candidates.length);
-	const c = candidates[i];
-	return hasColor ? c[randomColor()] : c;
+function getSizeOpt(opts) {
+	if ('size' in opts) {
+		if (typeof opts.size !== 'number') {
+			opts.size = DEFAULT_SIZE;
+		} else if (opts.size < DEFAULT_SIZE) {
+			opts.size = DEFAULT_SIZE;
+		}
+	} else {
+		opts.size = DEFAULT_SIZE;
+	}
+	return opts.size;
 }
 
-function line(max, body) {
+function getColorOpt(opts) {
+	if ('color' in opts) {
+		if (typeof opts.color !== 'boolean') {
+			opts.color = DEFAULT_COLOR;
+		}
+	} else {
+		opts.color = DEFAULT_COLOR;
+	}
+	return opts.color;
+}
+
+function makeTree(i, size, hasColor) {
+	let line;
+	switch (i) {
+		case 0:
+			line = makeLine(size, '*');
+			return hasColor ? line.yellow : line;
+		case 1:
+			line = makeLine(size, '_/ \\_');
+			return hasColor ? line.yellow : line;
+		case 2:
+			line = makeLine(size, '\\     /');
+			return hasColor ? line.yellow : line;
+		case 3:
+			line = makeLine(size, '/_\' \'_\\');
+			return hasColor ? line.yellow : line;
+		default:
+			return makeNthLine(i, size, hasColor);
+	}
+}
+
+function makePot(size, hasColor) {
+	const i = Math.floor(size / 25) + 1;
+	const line = makeLine(size, ['*', repeat(size - 2, '-'), '*']);
+	return [
+		hasColor ? line.green : line,
+		makeLine(size, ['[', repeat(7 * i, '_'), ']']),
+		makeLine(size, ['\\', repeat(5 * i, '_'), '/']),
+		''
+	];
+}
+
+function makeLine(max, body) {
+	if (typeof body.join === 'function') {
+		body = body.join('');
+	}
 	const offset = Array((max - body.length) >> 1).fill(' ').join('');
 	return offset + body;
 }
 
-function repeatChar(space, ch) {
-	return Array(space).fill(ch || ' ').join('');
-}
-
-function random(min, max) {
-	min = Math.ceil(min);
-	max = Math.floor(max);
-	return Math.floor(Math.random() * (max - min)) + min;
-}
-
-function randomColor() {
-	const candidatess = [
-		'red', 'green', 'yellow',
-		'blue', 'magenta', 'cyan', 'white'
-	];
-	return candidatess[random(0, candidatess.length)];
-}
-
-function treeLine(i, size, hasColor) {
+function makeNthLine(i, size, hasColor) {
 	const space = i - 2;
 	if (space % 2 === 0) {
 		return '';
 	}
-	const body = line(size, ['/', repeatChar(space, ' '), '\\'].join(''));
-	return body
-		.split('')
+
+	const line = makeLine(size, ['/', repeat(space, ' '), '\\']);
+	return line.split('')
 		.map((c, i) => {
 			if (c === '/' || c === '\\') {
 				return hasColor ? c.green : c;
-			}
-			if (c === ' ' && body.indexOf('/') < i) {
+			} else if (c === ' ' && line.indexOf('/') < i) {
 				return randomDeco(hasColor);
 			}
 			return c;
@@ -67,60 +112,21 @@ function treeLine(i, size, hasColor) {
 		.join('');
 }
 
-function treeSize(opts) {
-	const defaultSize = 15;
-	if ('size' in opts) {
-		if (typeof opts.size !== 'number') {
-			opts.size = defaultSize;
-		} else if (opts.size < defaultSize) {
-			opts.size = defaultSize;
-		}
-	} else {
-		opts.size = defaultSize;
-	}
-	return opts.size;
+function randomDeco(hasColor) {
+	const i = random(DECO_CANDIDATES.length);
+	const c = DECO_CANDIDATES[i];
+	return hasColor ? c[randomColor()] : c;
 }
 
-function treeColor(opts) {
-	const defaultColor = false;
-	if ('color' in opts) {
-		if (typeof opts.color !== 'boolean') {
-			opts.color = defaultColor;
-		}
-	} else {
-		opts.color = defaultColor;
-	}
-	return opts.color;
+function repeat(size, c) {
+	return Array(size).fill(c || ' ').join('');
 }
 
-function treeLines(i, size, hasColor) {
-	let l;
-	switch (i) {
-		case 0:
-			l = line(size, '*');
-			return hasColor ? l.yellow : l;
-		case 1:
-			l = line(size, '_/ \\_');
-			return hasColor ? l.yellow : l;
-		case 2:
-			l = line(size, '\\     /');
-			return hasColor ? l.yellow : l;
-		case 3:
-			l = line(size, '/_\' \'_\\');
-			return hasColor ? l.yellow : l;
-		default:
-			return treeLine(i, size, hasColor);
-	}
+function random(max) {
+	return Math.floor(Math.random() * Math.floor(max));
 }
 
-function treeBottom(size, hasColor) {
-	const i = Math.floor(size / 25) + 1;
-	const l = line(size, ['*', repeatChar(size - 2, '-'), '*'].join(''));
-	return [
-		hasColor ? l.green : l,
-		line(size, ['[', repeatChar(7 * i, '_'), ']'].join('')),
-		line(size, ['\\', repeatChar(5 * i, '_'), '/'].join('')),
-		''
-	];
+function randomColor() {
+	return COLOR_CANDIDATES[random(COLOR_CANDIDATES.length)];
 }
 

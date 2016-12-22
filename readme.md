@@ -2,6 +2,8 @@
 
 > :christmas_tree: xmas-tree ascii art
 
+<p align="center"><img src="https://cloud.githubusercontent.com/assets/1744446/21423997/549b4294-c883-11e6-8aa6-dd9016a578fb.png" width=283></p>
+
 
 ## Install
 
@@ -78,6 +80,11 @@ $ xmas-tree --help
     $ xmas-tree --size 30
     $ xmas-tree --color
 ```
+
+
+## References
+
+- [WPC/ascii_art.c at master · OLIMEX/WPC](https://goo.gl/VLGyVL)
 
 
 ## License

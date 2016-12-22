@@ -2,9 +2,10 @@
 
 > :christmas_tree: xmas-tree ascii art
 
-<p align="center"><img src="https://cloud.githubusercontent.com/assets/1744446/21423997/549b4294-c883-11e6-8aa6-dd9016a578fb.png" width=283></p>
+<p align="center"><img src="https://cloud.githubusercontent.com/assets/1744446/21429876/13737bee-c8a4-11e6-9824-a827bfcf639f.gif"></p>
 
 > Decorations are generated randomly
+
 
 ## Install
 

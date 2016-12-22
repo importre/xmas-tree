@@ -11,7 +11,7 @@ function xmasTree(opts) {
 	return Array(size).fill()
 		.map((_, i) => treeLines(i, size, hasColor))
 		.filter(i => i.length > 0)
-		.concat(treeButton(size, hasColor))
+		.concat(treeBottom(size, hasColor))
 		.join('\n')
 		.replace(/^/, '\n')
 		.replace(/^/gm, '    ');
@@ -113,7 +113,7 @@ function treeLines(i, size, hasColor) {
 	}
 }
 
-function treeButton(size, hasColor) {
+function treeBottom(size, hasColor) {
 	const i = Math.floor(size / 25) + 1;
 	const l = line(size, ['*', repeatChar(size - 2, '-'), '*'].join(''));
 	return [

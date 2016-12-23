@@ -19,15 +19,23 @@ const COLOR_CANDIDATES = [
 ];
 
 function xmasTree(opts) {
-	const size = getSizeOpt(opts);
-	const hasColor = getColorOpt(opts);
-	return Array(size).fill()
-		.map((_, i) => makeTree(i, size, hasColor))
-		.filter(i => i.length > 0)
-		.concat(makePot(size, hasColor))
-		.join('\n')
-		.replace(/^/, '\n')
-		.replace(/^/gm, '    ');
+	try {
+		if (opts.version) {
+			return require('./package.json').version;
+		}
+
+		const size = getSizeOpt(opts);
+		const hasColor = getColorOpt(opts);
+		return Array(size).fill()
+			.map((_, i) => makeTree(i, size, hasColor))
+			.filter(i => i.length > 0)
+			.concat(makePot(size, hasColor))
+			.join('\n')
+			.replace(/^/, '\n')
+			.replace(/^/gm, '    ');
+	} catch (err) {
+		return err;
+	}
 }
 
 function getSizeOpt(opts) {

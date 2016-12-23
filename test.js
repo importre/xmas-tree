@@ -2,37 +2,44 @@ import test from 'ava';
 import fn from './';
 
 test('default', t => {
-	t.true(fn().length > 0);
+	t.is(typeof fn(), 'string');
 });
 
 test('with size', t => {
-	t.true(fn({
+	t.is(typeof fn({
 		size: 10
-	}).length > 0);
+	}), 'string');
 
-	t.true(fn({
+	t.is(typeof fn({
 		size: 100
-	}).length > 0);
+	}), 'string');
 
-	t.true(fn({
+	t.is(typeof fn({
 		size: -10
-	}).length > 0);
+	}), 'string');
 });
 
 test('with color', t => {
-	t.true(fn({
+	t.is(typeof fn({
 		color: true
-	}).length > 0);
+	}), 'string');
 
-	t.true(fn({
+	t.is(typeof fn({
 		color: false
-	}).length > 0);
+	}), 'string');
 });
 
 test('with size & color', t => {
-	t.true(fn({
+	t.is(typeof fn({
 		color: true,
 		size: 100
-	}).length > 0);
+	}), 'string');
+});
+
+test('version', t => {
+	const ver = require('./package.json').version;
+	t.is(fn({
+		version: true
+	}), ver);
 });
 

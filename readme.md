@@ -60,6 +60,7 @@ $ xmas-tree --help
     $ xmas-tree
     $ xmas-tree --size 30
     $ xmas-tree --color
+    $ xmas-tree --version
 ```
 
 

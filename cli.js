@@ -16,6 +16,7 @@ const cli = meow(`
 	  $ xmas-tree
 	  $ xmas-tree --size 30
 	  $ xmas-tree --color
+	  $ xmas-tree --version
 `);
 
 console.log(xmasTree(cli.flags));

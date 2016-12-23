@@ -4,8 +4,6 @@
 
 <p align="center"><img src="https://cloud.githubusercontent.com/assets/1744446/21429876/13737bee-c8a4-11e6-9824-a827bfcf639f.gif"></p>
 
-> Decorations are generated randomly
-
 
 ## Install
 
@@ -22,6 +20,27 @@ const xmasTree = require('xmas-tree');
 console.log(xmasTree());
 ```
 
+### Output
+
+```
+
+           *
+         _/ \_
+        \     /
+        /_' '_\
+         /'+ \
+        / o o \
+       /  -' *-\
+      /.  oo+...\
+     /o- @ o @o' \
+    *-------------*
+       [_______]
+        \_____/
+
+```
+
+> Decorations are generated randomly
+
 
 ## API
 
@@ -35,6 +54,11 @@ Type: `number`<br>
 Default: `15`
 
 ##### color (for CLI)
+
+Type: `boolean`<br>
+Default: `false`
+
+##### version
 
 Type: `boolean`<br>
 Default: `false`

@@ -10,14 +10,25 @@ const cli = meow(`
 
 	Options
 	  --size number
-	  --color  # for CLI
+	  --color
+	  --loop
 
 	Examples
 	  $ xmas-tree
 	  $ xmas-tree --size 30
 	  $ xmas-tree --color
+	  $ xmas-tree --color --loop
 	  $ xmas-tree --version
 `);
 
-console.log(xmasTree(cli.flags));
+function main() {
+	process.stdout.write('\x1Bc');
+	console.log(xmasTree(cli.flags));
+}
+
+if (cli.flags.loop) {
+	setInterval(main, 200);
+} else {
+	main();
+}
 

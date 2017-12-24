@@ -2,7 +2,9 @@
 
 > :christmas_tree: xmas-tree ascii art
 
-<p align="center"><img src="https://cloud.githubusercontent.com/assets/1744446/21429876/13737bee-c8a4-11e6-9824-a827bfcf639f.gif"></p>
+<p align="center">
+  <img width=330 src="https://user-images.githubusercontent.com/1744446/34326729-5415a9f0-e8f7-11e7-8b7c-fec0d4060dcc.gif">
+</p>
 
 
 ## Install
@@ -78,12 +80,14 @@ $ xmas-tree --help
 
   Options
     --size number
-    --color  # for CLI
+    --color
+    --loop
 
   Examples
     $ xmas-tree
     $ xmas-tree --size 30
     $ xmas-tree --color
+    $ xmas-tree --color --loop
     $ xmas-tree --version
 ```
 

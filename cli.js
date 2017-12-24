@@ -22,9 +22,11 @@ const cli = meow(`
 `);
 
 function main() {
-	process.stdout.write('\x1Bc');
+	process.stdout.write(`\u001b[10000A\u001b[2K\u001b[10000D`);
 	console.log(xmasTree(cli.flags));
 }
+
+process.stdout.write(`\u001b[2J`);
 
 if (cli.flags.loop) {
 	setInterval(main, 200);

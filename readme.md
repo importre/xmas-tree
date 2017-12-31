@@ -92,9 +92,10 @@ $ xmas-tree --help
 ```
 
 
-## References
+## Contributors
 
-- [WPC/ascii_art.c at master · OLIMEX/WPC](https://goo.gl/VLGyVL)
+- Laura Brown
+    - http://laurabrown.ca
 
 
 ## License
